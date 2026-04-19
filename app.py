@@ -1,3 +1,8 @@
+@app.route('/ip', methods=['GET'])
+def get_ip():
+    import urllib.request
+    ip = urllib.request.urlopen('https://ifconfig.me').read().decode('utf-8')
+    return jsonify({'ip': ip})
 from flask import Flask, request, jsonify
 import bcrypt
 import time
