@@ -4,8 +4,10 @@ import time
 
 app = Flask(__name__)
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['GET', 'POST'])
 def generate_sign():
+    if request.method == 'GET':
+        return 'OK', 200
     data = request.get_json()
     client_id = data['clientId']
     client_secret = data['clientSecret'].encode('utf-8')
