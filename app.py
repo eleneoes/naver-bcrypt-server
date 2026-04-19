@@ -14,8 +14,7 @@ def generate_sign():
     timestamp = str(int(time.time() * 1000))
     password = (client_id + '_' + timestamp).encode('utf-8')
     hashed = bcrypt.hashpw(password, client_secret)
-    sign = hashed.decode('utf-8')
-    return jsonify({'timestamp': timestamp, 'client_secret_sign': sign})
+sign = hashed.decode('utf-8')    return jsonify({'timestamp': timestamp, 'client_secret_sign': sign})
 
 if __name__ == '__main__':
     app.run()
