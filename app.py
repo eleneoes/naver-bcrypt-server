@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import bcrypt
 import time
+import base64
 
 app = Flask(__name__)
 
@@ -14,7 +15,8 @@ def generate_sign():
     timestamp = str(int(time.time() * 1000))
     password = (client_id + '_' + timestamp).encode('utf-8')
     hashed = bcrypt.hashpw(password, client_secret)
-sign = hashed.decode('utf-8')    return jsonify({'timestamp': timestamp, 'client_secret_sign': sign})
+    sign = base64.b64encode(hashed).decode('utf-8')
+    return jsonify({'timestamp': timestamp, 'client_secret_sign': sign})
 
 if __name__ == '__main__':
     app.run()
